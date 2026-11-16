@@ -101,27 +101,6 @@ The app opens at `http://localhost:3000`.
 
 ---
 
-## 🔐 Environment Variables
-
-Create a `.env` file in `Main Backend` with the following (use your own values):
-
-```env
-PORT=7000
-MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/VestaStay?appName=Cluster0
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=465
-EMAIL_USER=your-email@example.com
-EMAIL_PASS=your-app-password
-```
-
-Add any payment keys (Paystack, M-Pesa) your setup needs.
-
-**Never commit `.env`.** It is listed in `.gitignore`. On Render, set these same variables in the service's **Environment** tab. Enter each variable's name and value in separate fields, with no quotes around the value.
-
----
-
-## 🔌 API Endpoints
-
 ### Bookings
 
 | Method      | Endpoint            | Description       |
