@@ -4,8 +4,6 @@ A full-stack hotel booking web application. Guests can search for rooms, pay onl
 
 **Live site:** [kate544.github.io/VestaStay](https://kate544.github.io/VestaStay/)
 
-> The API runs on a free Render instance, so the first request after a period of inactivity can take up to a minute while the server wakes up.
-
 ---
 
 ## ✨ Features
