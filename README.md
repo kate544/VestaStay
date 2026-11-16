@@ -1,70 +1,182 @@
-# Getting Started with Create React App
+# 🏨 VestaStay
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack hotel booking web application. Guests can search for rooms, pay online and receive email confirmations, while hotel staff manage rooms and bookings from an admin portal.
 
-## Available Scripts
+**Live site:** [kate544.github.io/VestaStay](https://kate544.github.io/VestaStay/)
 
-In the project directory, you can run:
+> The API runs on a free Render instance, so the first request after a period of inactivity can take up to a minute while the server wakes up.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Guest site**
 
-### `npm test`
+- Search rooms by location and other criteria
+- Browse featured rooms with price, bed type and guest capacity
+- Book and pay with **M-Pesa** or **card (Paystack)**
+- Email notification on successful booking
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Admin / manager portal**
 
-### `npm run build`
+- Role-based login (guest, manager, admin)
+- View, update and delete bookings
+- Add, edit and delete rooms
+- Room status updates automatically: a room with quantity `0` becomes **Sold Out**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Layer    | Technology                                |
+| -------- | ----------------------------------------- |
+| Frontend | React (Create React App), CSS             |
+| Backend  | Node.js, Express                          |
+| Database | MongoDB Atlas with Mongoose               |
+| Payments | Paystack, M-Pesa                          |
+| Email    | Nodemailer                                |
+| Hosting  | GitHub Pages (frontend), Render (backend) |
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📁 Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+VestaStay/
+├── Main Backend/   # Express API (server.js), connects to MongoDB
+├── backend/        # Additional backend code
+├── public/         # Static assets
+└── src/            # React frontend
+    └── Components/ # Navbar, Hero, FeaturedHotel, Admin, Login, payments...
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Node.js 18 or later
+- A MongoDB Atlas cluster (or a local MongoDB instance)
+- An email account that supports SMTP (for example a Gmail app password)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 1. Clone the repository
 
-### Code Splitting
+```bash
+git clone https://github.com/kate544/VestaStay.git
+cd VestaStay
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 2. Run the backend
 
-### Analyzing the Bundle Size
+```bash
+cd "Main Backend"
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Create a `.env` file inside `Main Backend` (see the variables below), then start the server:
 
-### Making a Progressive Web App
+```bash
+npm run start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+You should see:
 
-### Advanced Configuration
+```
+🚀 VestaStay Server on http://localhost:7000
+📧 Email Service Ready
+✅ VestaStay Main Database Connected!
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 3. Run the frontend
 
-### Deployment
+From the project root:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm install
+npm start
+```
 
-### `npm run build` fails to minify
+The app opens at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> The frontend currently calls the deployed API at `https://vestastay.onrender.com`. To develop against your local backend, change that URL to `http://localhost:7000` in `src/App.jsx` (and any other file that calls the API).
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file in `Main Backend` with the following (use your own values):
+
+```env
+PORT=7000
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/VestaStay?appName=Cluster0
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=465
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-app-password
+```
+
+Add any payment keys (Paystack, M-Pesa) your setup needs.
+
+**Never commit `.env`.** It is listed in `.gitignore`. On Render, set these same variables in the service's **Environment** tab. Enter each variable's name and value in separate fields, with no quotes around the value.
+
+---
+
+## 🔌 API Endpoints
+
+### Bookings
+
+| Method      | Endpoint            | Description       |
+| ----------- | ------------------- | ----------------- |
+| GET         | `/api/bookings`     | List all bookings |
+| POST        | `/api/bookings`     | Create a booking  |
+| PUT / PATCH | `/api/bookings/:id` | Update a booking  |
+| DELETE      | `/api/bookings/:id` | Delete a booking  |
+
+### Rooms
+
+| Method      | Endpoint         | Description                             |
+| ----------- | ---------------- | --------------------------------------- |
+| GET         | `/api/rooms`     | List all rooms                          |
+| POST        | `/api/rooms`     | Add a room                              |
+| PUT / PATCH | `/api/rooms/:id` | Update a room (status follows quantity) |
+| DELETE      | `/api/rooms/:id` | Delete a room                           |
+
+### Room document
+
+```json
+{
+  "name": "Family Suite",
+  "location": "Mombasa",
+  "type": "King Bed",
+  "price": 25000,
+  "numofGuests": 4,
+  "quantity": 15,
+  "details": "Free Wifi • Breakfast & Dinner Included",
+  "image": "<url or base64>",
+  "status": "Available"
+}
+```
+
+`name`, `location`, `type`, `price` and `numofGuests` are required.
+
+---
+
+## 🗺️ Roadmap
+
+- Date-based availability and double-booking prevention
+- Reduce room quantity automatically after a confirmed booking
+- Booking history for guests
+- Image uploads to cloud storage instead of storing images in the database
+
+---
+
+## 👩‍💻 Author
+
+**Kathryn** — [@kate544](https://github.com/kate544) · [Portfolio](https://kate544.github.io/My-Portfolio)
+
+---
+
+## 📄 License
+
+This project is for learning and portfolio purposes.
